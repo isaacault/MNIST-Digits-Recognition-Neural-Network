@@ -38,5 +38,5 @@ See also the list of [contributors](https://github.com/isaacault/MNIST-Digits-Re
 
 ## Acknowledgments
 
-* Vinh Nguyen on youtube for providing a tutorial to follow along and create a base neural network
-* 3Blue1Brown for inspiration into the topic
+* [Vinh Nguyen](https://www.youtube.com/watch?v=KkwX7FkLfug) for providing a tutorial to follow along and create a base neural network
+* [3Blue1Brown](https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw) for inspiration into the topic
