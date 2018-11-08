@@ -1,4 +1,4 @@
-OBJ = main.o Net.o Neuron.o
+OBJ = main.o Net.o Neuron.o Parser.o
 
 network: $(OBJ)
 	g++ -o network $(OBJ)
@@ -11,6 +11,9 @@ Net.o: Net.cpp Net.h Neuron.o
 
 Neuron.o: Neuron.cpp Neuron.h
 	g++ -c Neuron.cpp
+
+Parser.o: Parser.cpp Parser.h
+	g++ -c Parser.cpp
 
 
 clean:
