@@ -1,6 +1,7 @@
 #include "defs.h"
 #include "NetManager.h"
 #include "Parser.h"
+#include "SharedMem.h"
 #include <unistd.h>
 #include <iostream>
 #include <sys/mman.h>
@@ -24,11 +25,12 @@ int main(int argc, char * argv[])
     vector<double> resultVals;
     myNet.getResults(resultVals);
     */
-    Digit * shDigit = (Digit *) mmap(NULL, (size_t) 800, 
-                                PROT_READ|PROT_WRITE, 
-                                MAP_SHARED|MAP_ANONYMOUS, -1, 0);
-    if (shDigit == MAP_FAILED) {
-        cout << "Map Failed" << endl;
+    SharedMem * shmem = (SharedMem *) mmap(NULL, (size_t) 800, 
+                                    PROT_READ|PROT_WRITE, 
+                                    MAP_SHARED|MAP_ANONYMOUS, -1, 0);
+    if (shmem == MAP_FAILED) {
+        cerr << "Map Failed" << endl;
+        abort();
     }
 
     pid_t pid = fork();
@@ -41,13 +43,14 @@ int main(int argc, char * argv[])
         Parser myParser(MNIST_DATA_DIRECTORY);
         
     }else if (pid > 0) {
+        // Parent process
         DEBUG_PRINT("Parent Process");
 
-        // Parent process
         NetManager myManager(topology);
     }else {
         // fork failed
-        return 1;
+        cerr << "Fork Failed" << endl;
+        return -1;
     }
 
 

@@ -1,5 +1,5 @@
 OBJ = main.o Net.o Neuron.o Parser.o Digit.o NetManager.o
-DEBUG = 
+DEBUG = -DDEBUG
 
 network: $(OBJ)
 	g++ $(DEBUG) -o network $(OBJ)
