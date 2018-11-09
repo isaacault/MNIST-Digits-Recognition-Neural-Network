@@ -11,11 +11,11 @@ using namespace std;
 class Parser
 {
     public:
-        Parser(const string path);
-        bool fill_queue();
+        Parser(const string path="MNIST/");
+        bool fillQueue();
 
     private:
-        string m_mnist_folder_path;
+        string m_MNISTDataDirectory;
         vector<string> readWord();
 
 };

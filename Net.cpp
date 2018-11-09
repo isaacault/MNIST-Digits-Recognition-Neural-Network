@@ -19,6 +19,8 @@ Net::Net(const vector<unsigned> &topology)
         // Force the bias node's output value to 1.0. It's the last neuron created above
         m_layers.back().back().setOutputVal(1.0);
     }
+
+    cout << "end of net constructor" << endl;
 }
 
 

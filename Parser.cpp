@@ -2,7 +2,10 @@
 
 Parser::Parser(const string path)
 {
+    cout << "Hello from Parser!" << endl;
+    cout << path << endl;
     if (!path.empty()){
-        m_mnist_folder_path = path;
+        m_MNISTDataDirectory = path;
     }
+
 }
