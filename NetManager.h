@@ -3,6 +3,7 @@
 
 #include "Net.h"
 #include "Digit.h"
+#include "defs.h"
 #include <vector>
 #include <cstdlib>
 #include <iostream>

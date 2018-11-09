@@ -2,7 +2,8 @@
 
 Digit::Digit()
 {
-
+    DEBUG_PRINT("Digit Constructor");
+    ready = false;
 }
 
 

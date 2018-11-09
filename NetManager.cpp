@@ -3,5 +3,5 @@
 NetManager::NetManager(const vector<unsigned> &topology) :
     m_myNetwork(topology)
 {
-    cout << "hello from NetManager!" << endl;
+    DEBUG_PRINT("NetManager Constructor");
 }

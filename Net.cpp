@@ -2,6 +2,7 @@
 
 Net::Net(const vector<unsigned> &topology)
 {
+    DEBUG_PRINT("Net Constructor");
     unsigned numLayers = topology.size();
     for (unsigned layerNum = 0; layerNum < numLayers; layerNum++) {
         m_layers.push_back(Layer());
@@ -13,14 +14,12 @@ Net::Net(const vector<unsigned> &topology)
         for (unsigned neuronNum = 0; neuronNum <= topology[layerNum]; neuronNum++) {
             m_layers.back().push_back(Neuron(numOutputs, neuronNum));
 
-            cout << "Made a Neuron!" << endl;
+            DEBUG_PRINT("Made a Neuron!");
         }
 
         // Force the bias node's output value to 1.0. It's the last neuron created above
         m_layers.back().back().setOutputVal(1.0);
     }
-
-    cout << "end of net constructor" << endl;
 }
 
 

@@ -2,8 +2,8 @@
 
 Parser::Parser(const string path)
 {
-    cout << "Hello from Parser!" << endl;
-    cout << path << endl;
+    DEBUG_PRINT( "Parser Constructer. Path " << path );
+
     if (!path.empty()){
         m_MNISTDataDirectory = path;
     }

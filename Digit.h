@@ -2,6 +2,8 @@
 #define DIGIT_H
 
 #include <vector>
+#include <iostream>
+#include "defs.h"
 
 using namespace std;
 

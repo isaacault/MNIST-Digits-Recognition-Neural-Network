@@ -6,7 +6,9 @@
 	],
 	"settings": {
 		"files.associations": {
-			"netmanager.h": "c"
+			"netmanager.h": "c",
+			"iostream": "cpp",
+			"ostream": "cpp"
 		}
 	}
 }

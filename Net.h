@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <iostream>
 #include "Neuron.h"
+#include "defs.h"
 
 
 class Net
