@@ -1,13 +1,25 @@
 #include "Digit.h"
 
-Digit::Digit()
+Digit::Digit() : index(0)
 {
     DEBUG_PRINT("Digit Constructor");
     
 }
 
-
-void Digit::pushBack(const unsigned char pixel)
+Digit& Digit::operator=(const Digit &dig)
 {
-    m_picture.push_back(pixel);
+    memcpy(picture, dig.picture, sizeof(picture));
+    index = dig.index;
 }
+
+bool Digit::addPixel(const unsigned char pixel)
+{
+    if (index < PIXEL_COUNT) {
+        picture[index++] = pixel;
+        return true;
+    }else{
+        return false;
+    }
+}
+
+

@@ -38,6 +38,7 @@ int main(int argc, char * argv[])
     if (pid == 0) {
         // Child Process
         DEBUG_PRINT("Child Process");
+        shmem->setParserPID(getpid());
 
         // Call parser->digit
         Parser myParser(MNIST_DATA_DIRECTORY);
@@ -45,6 +46,7 @@ int main(int argc, char * argv[])
     }else if (pid > 0) {
         // Parent process
         DEBUG_PRINT("Parent Process");
+        shmem->setNetworkPID(getpid());
 
         NetManager myManager(topology);
     }else {

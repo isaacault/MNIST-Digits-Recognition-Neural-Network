@@ -6,19 +6,21 @@
 #include <iostream>
 #include <cstdlib>
 #include "defs.h"
+#include "Digit.h"
 
 using namespace std;
 
 class Parser
 {
     public:
-        Parser(const string path="MNIST/");
+        Parser(vector<string> file, const string path="MNIST/");
         bool fillQueue();
 
     private:
+        void traversePastHeader(FILE * fp);
+        unsigned char endianSwap(unsigned char c);
         string m_MNISTDataDirectory;
-        vector<string> readWord();
-
+        Digit m_digit;
 };
 
 

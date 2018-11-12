@@ -3,6 +3,8 @@
 
 #define MNIST_DATA_DIRECTORY "MNIST"
 
+#define PIXEL_COUNT 28*28
+
 #ifdef DEBUG
 #include <unistd.h>
 #define DEBUG_PRINT(x) cout << "PID " << getpid() << ": " << x << endl;

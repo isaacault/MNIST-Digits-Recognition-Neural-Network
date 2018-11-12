@@ -3,7 +3,8 @@
 
 #include <vector>
 #include <iostream>
-#include <semaphore.h>
+#include <string.h>
+#include <stdio.h>
 #include "defs.h"
 
 using namespace std;
@@ -12,10 +13,13 @@ class Digit
 {
     public:
         Digit();
-        void pushBack(const unsigned char pixel);
-        
+        bool addPixel(const unsigned char pixel);
+        Digit& operator=(const Digit &dig);
+
     private:
-        vector<unsigned char> m_picture;
+        int index; 
+        unsigned char picture[PIXEL_COUNT];
+
         
 };
 
