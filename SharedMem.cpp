@@ -8,6 +8,7 @@ SharedMem::SharedMem()
     m_network = -1;
     m_parser = -1;
     m_consumed = true;
+    sem_init(&m_sem, 1, 1);
 }
 
 void SharedMem::setNetworkPID(pid_t pid)
@@ -22,9 +23,9 @@ void SharedMem::setParserPID(pid_t pid)
 
 void SharedMem::setDigit(Digit dig)
 {
-    sem_wait(m_sem);
+    sem_wait(&m_sem);
     m_digit = dig;
-    sem_post(m_sem);
+    sem_post(&m_sem);
 }
 
 pid_t SharedMem::getNetworkPID() { return m_network; }

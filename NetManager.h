@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <iostream>
 #include "SharedMem.h"
+#include <unistd.h>
 
 using namespace std;
 
@@ -15,6 +16,7 @@ class NetManager
 {
     public:
         NetManager(SharedMem * shmem, const vector<unsigned> &topology);
+        void printOutput(vector<double> label, vector<double> results);
 
     private:
         Net m_myNetwork;

@@ -1,7 +1,7 @@
 #ifndef DEFS_H
 #define DEFS_H
 
-#define MNIST_DATA_DIRECTORY "MNIST_data"
+#define MNIST_DATA_DIRECTORY "MNIST_data/"
 
 #define PIXEL_COUNT 28*28
 

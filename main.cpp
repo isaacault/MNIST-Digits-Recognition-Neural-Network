@@ -17,9 +17,10 @@ int main(int argc, char * argv[])
     filenames.push_back("t10k-labels-idx1-ubyte");
     
     vector<unsigned> topology;
-    topology.push_back(3);
-    topology.push_back(2);
-    topology.push_back(1);
+    topology.push_back(PIXEL_COUNT);
+    topology.push_back(16);
+    topology.push_back(16);
+    topology.push_back(10);
     //Net myNet(topology);
     /*
     vector<double> inputVals;
@@ -38,6 +39,8 @@ int main(int argc, char * argv[])
         cerr << "Map Failed" << endl;
         abort();
     }
+
+    shmem = new SharedMem();
 
     pid_t pid = fork();
 

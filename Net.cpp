@@ -25,6 +25,7 @@ Net::Net(const vector<unsigned> &topology)
 
 void Net::feedForward(const vector<double> &inputVals)
 {
+    cout << inputVals.size() << " " << m_layers[0].size() << endl;
     assert(inputVals.size() == m_layers[0].size() - 1);
 
     // Assign (latch) the input values into the input neurons

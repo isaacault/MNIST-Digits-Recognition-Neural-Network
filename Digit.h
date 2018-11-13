@@ -15,14 +15,15 @@ class Digit
         Digit();
         Digit& operator=(const Digit &dig);
         bool addPixel(const unsigned char pixel);
-        vector<unsigned char> getPicture();
+        vector<double> getPicture() const;
         void setLabel(const unsigned char label);
+        vector<double> getLabel();
         void clean();
 
     private:
         int m_currentIndex; 
-        vector<unsigned char> m_picture; // change this to a vector
-        int m_label;        
+        vector<double> m_picture; // change this to a vector
+        vector<double> m_label;        
 };
 
 

@@ -20,7 +20,7 @@ class Parser
 
     private:
         void traversePastHeader(FILE * fp);
-        unsigned char endianSwap(unsigned char c);
+        unsigned int endianSwap(unsigned int c);
         string m_MNISTDataDirectory;
         Digit m_digit;
 };

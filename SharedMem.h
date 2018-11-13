@@ -9,7 +9,6 @@ class SharedMem
 {
     public:
         SharedMem();
-        bool isFinishedRead();
         void setNetworkPID(pid_t pid);
         void setParserPID(pid_t pid);
         void setDigit(Digit dig);
@@ -24,7 +23,7 @@ class SharedMem
         pid_t m_network;
         pid_t m_parser;
         Digit m_digit;
-        sem_t * m_sem;
+        sem_t m_sem;
         bool m_consumed;
 };
 

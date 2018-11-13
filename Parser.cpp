@@ -8,8 +8,8 @@ Parser::Parser(SharedMem * shmem, vector<string> files, const string path)
         m_MNISTDataDirectory = path;
     }
 
-    vector<string>::iterator fileIt;
-    unsigned char * buf;
+    vector<string>::iterator fileIt = files.begin();
+    unsigned char buf;
 
     FILE * fp_images = fopen((m_MNISTDataDirectory + *(fileIt++)).c_str(), "r");
     FILE * fp_labels = fopen((m_MNISTDataDirectory + *(fileIt++)).c_str(), "r");
@@ -23,15 +23,16 @@ Parser::Parser(SharedMem * shmem, vector<string> files, const string path)
     
     while (!feof(fp_images) && !feof(fp_labels)) {
         while(!shmem->consumed()) {
+            //DEBUG_PRINT("Parser waiting");
             usleep(5000); // this should be modified so that consumer wakes producer
         }
+        DEBUG_PRINT("Parser taking action");
         shmem->setConsumed(false);
         do {
-            // replace this with unique endianness swap func
-            fread(buf, sizeof(unsigned char), 1, fp_images);
-        } while (m_digit.addPixel(endianSwap(*buf)));
-        fread(buf, sizeof(unsigned char), 1, fp_images);
-        m_digit.setLabel(endianSwap(*buf));
+            fread(&buf, sizeof(unsigned char), 1, fp_images);
+        } while (m_digit.addPixel(buf));
+        fread(&buf, sizeof(unsigned char), 1, fp_labels);
+        m_digit.setLabel(buf);
 
         shmem->setDigit(m_digit);
 
@@ -45,7 +46,7 @@ Parser::Parser(SharedMem * shmem, vector<string> files, const string path)
 
 void Parser::traversePastHeader(FILE * fp)
 {
-    unsigned char buf;
+    unsigned int buf;
 
     fread(&buf, sizeof(buf), 1, fp);
     unsigned int magic_num = endianSwap(buf);
@@ -60,7 +61,7 @@ void Parser::traversePastHeader(FILE * fp)
      *          of items in the file.
      * Case 2:  magic_num == 2051. In this case the file being read is an image
      *          file and there are 3 more items in the header, the number of
-     *          images, number of rows, and number of columns.
+     *          imageshttps://stackoverflow.com/questions/15879761/segmentation-fault-on-fopen, number of rows, and number of columns.
      * 
      * **************************************************************************/
 
@@ -70,7 +71,7 @@ void Parser::traversePastHeader(FILE * fp)
 }
 
 
-unsigned char Parser::endianSwap(unsigned char c)
+unsigned int Parser::endianSwap(unsigned int c)
 {
     return  ((c >> 24) & 0xff) | // move byte 3 to byte 0
             ((c << 8) & 0xff0000) | // move byte 1 to byte 2
