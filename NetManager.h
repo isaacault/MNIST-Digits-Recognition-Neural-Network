@@ -7,13 +7,14 @@
 #include <vector>
 #include <cstdlib>
 #include <iostream>
+#include "SharedMem.h"
 
 using namespace std;
 
 class NetManager
 {
     public:
-        NetManager(const vector<unsigned> &topology);
+        NetManager(SharedMem * shmem, const vector<unsigned> &topology);
 
     private:
         Net m_myNetwork;

@@ -9,6 +9,12 @@
 
 int main(int argc, char * argv[])
 {
+    vector<string> filenames;
+    /** this should be done differently (from defs or argv?) */
+    filenames.push_back("train-images-idx3-ubyte");
+    filenames.push_back("train-labels-idx1-ubyte");
+    filenames.push_back("t10k-images-idx3-ubyte");
+    filenames.push_back("t10k-labels-idx1-ubyte");
     
     vector<unsigned> topology;
     topology.push_back(3);
@@ -41,14 +47,14 @@ int main(int argc, char * argv[])
         shmem->setParserPID(getpid());
 
         // Call parser->digit
-        Parser myParser(MNIST_DATA_DIRECTORY);
+        Parser myParser(shmem, filenames, MNIST_DATA_DIRECTORY);
         
     }else if (pid > 0) {
         // Parent process
         DEBUG_PRINT("Parent Process");
         shmem->setNetworkPID(getpid());
 
-        NetManager myManager(topology);
+        NetManager myManager(shmem, topology);
     }else {
         // fork failed
         cerr << "Fork Failed" << endl;

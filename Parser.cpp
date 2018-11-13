@@ -1,6 +1,6 @@
 #include "Parser.h"
 
-Parser::Parser(vector<string> files, const string path)
+Parser::Parser(SharedMem * shmem, vector<string> files, const string path)
 {
     DEBUG_PRINT("Parser Constructer");
 
@@ -22,18 +22,21 @@ Parser::Parser(vector<string> files, const string path)
     traversePastHeader(fp_labels);
     
     while (!feof(fp_images) && !feof(fp_labels)) {
+        while(!shmem->consumed()) {
+            usleep(5000); // this should be modified so that consumer wakes producer
+        }
+        shmem->setConsumed(false);
         do {
             // replace this with unique endianness swap func
             fread(buf, sizeof(unsigned char), 1, fp_images);
         } while (m_digit.addPixel(endianSwap(*buf)));
         fread(buf, sizeof(unsigned char), 1, fp_images);
-        m_digit.addLabel(endianSwap(*buf));
+        m_digit.setLabel(endianSwap(*buf));
 
-        // shmem.setDigit(m_digit);
+        shmem->setDigit(m_digit);
 
-        // m_digit.clean ??
-        /* whats more efficient - clean or write over of array? */
-        
+
+        m_digit.clean();
     }
     fclose(fp_images);
     fclose(fp_labels);

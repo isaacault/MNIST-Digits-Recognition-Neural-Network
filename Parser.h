@@ -7,13 +7,15 @@
 #include <cstdlib>
 #include "defs.h"
 #include "Digit.h"
+#include "SharedMem.h"
+#include <unistd.h>
 
 using namespace std;
 
 class Parser
 {
     public:
-        Parser(vector<string> file, const string path="MNIST/");
+        Parser(SharedMem * shmem, vector<string> file, const string path="MNIST/");
         bool fillQueue();
 
     private:

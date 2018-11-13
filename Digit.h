@@ -13,14 +13,16 @@ class Digit
 {
     public:
         Digit();
-        bool addPixel(const unsigned char pixel);
         Digit& operator=(const Digit &dig);
+        bool addPixel(const unsigned char pixel);
+        vector<unsigned char> getPicture();
+        void setLabel(const unsigned char label);
+        void clean();
 
     private:
-        int index; 
-        unsigned char picture[PIXEL_COUNT];
-
-        
+        int m_currentIndex; 
+        vector<unsigned char> m_picture; // change this to a vector
+        int m_label;        
 };
 
 

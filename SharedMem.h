@@ -16,6 +16,8 @@ class SharedMem
         pid_t getNetworkPID();
         pid_t getParserPID();
         Digit getDigit();
+        bool consumed();
+        void setConsumed(bool val);
 
     private:
         bool m_finishedRead;
@@ -23,6 +25,7 @@ class SharedMem
         pid_t m_parser;
         Digit m_digit;
         sem_t * m_sem;
+        bool m_consumed;
 };
 
 #endif
