@@ -17,7 +17,7 @@ class Digit
         bool addPixel(const unsigned char pixel);
         vector<double> getPicture() const;
         void setLabel(const unsigned char label);
-        vector<double> getLabel();
+        vector<double> getLabel() const;
         void clean();
 
     private:

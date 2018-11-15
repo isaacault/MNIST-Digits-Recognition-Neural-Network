@@ -6,7 +6,7 @@ Net::Net(const vector<unsigned> &topology)
     unsigned numLayers = topology.size();
     for (unsigned layerNum = 0; layerNum < numLayers; layerNum++) {
         m_layers.push_back(Layer());
-        unsigned numOutputs = layerNum == topology.size() - 1 ? 0 : topology[layerNum + 1];
+        unsigned numOutputs = (layerNum == topology.size() - 1) ? 0 : topology[layerNum + 1];
 
 
         // We have made a new Layer, now fill it with neurons and
@@ -25,19 +25,23 @@ Net::Net(const vector<unsigned> &topology)
 
 void Net::feedForward(const vector<double> &inputVals)
 {
-    cout << inputVals.size() << " " << m_layers[0].size() << endl;
+    DEBUG_PRINT(inputVals.size() << " == " << m_layers[0].size() -1 << " ??");
     assert(inputVals.size() == m_layers[0].size() - 1);
 
+    DEBUG_PRINT("Passed assert");
     // Assign (latch) the input values into the input neurons
     for (unsigned i = 0; i < inputVals.size(); i++) {
         m_layers[0][i].setOutputVal(inputVals[i]);
     }
 
+    DEBUG_PRINT("Latched values to first layer");
+    DEBUG_PRINT("Forward propogating...");
+
     // Forward propogate
-    for (unsigned layerNum = 1; layerNum <= m_layers.size(); layerNum++) {
+    for (unsigned layerNum = 1; layerNum < m_layers.size(); layerNum++) {
         Layer &prevLayer = m_layers[layerNum - 1];
-        for (unsigned n = 0; n < m_layers[layerNum].size() - 1; n++) {
-            m_layers[layerNum][n].feedForward(prevLayer);
+        for (unsigned neuronNum = 0; neuronNum < m_layers[layerNum].size() - 1; neuronNum++) {
+            m_layers[layerNum][neuronNum].feedForward(prevLayer);
         }
     }
 }

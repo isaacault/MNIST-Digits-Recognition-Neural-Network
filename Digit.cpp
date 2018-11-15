@@ -10,6 +10,8 @@ Digit& Digit::operator=(const Digit &dig)
 {
     vector<double> temp = dig.getPicture(); // fix this - const'ness issue
     m_picture.swap(temp);
+    temp = dig.getLabel();
+    m_label.swap(temp);
     m_currentIndex = dig.m_currentIndex;
 }
 
@@ -26,7 +28,7 @@ bool Digit::addPixel(const unsigned char pixel)
 
 vector<double> Digit::getPicture() const { return m_picture; }
 
-vector<double> Digit::getLabel() { return m_label; }
+vector<double> Digit::getLabel() const { return m_label; }
 
 void Digit::setLabel(const unsigned char label)
 {

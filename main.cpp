@@ -32,15 +32,15 @@ int main(int argc, char * argv[])
     vector<double> resultVals;
     myNet.getResults(resultVals);
     */
-    SharedMem * shmem = (SharedMem *) mmap(NULL, (size_t) 800, 
+    void * address =  mmap(NULL, (size_t) 2700, 
                                     PROT_READ|PROT_WRITE, 
                                     MAP_SHARED|MAP_ANONYMOUS, -1, 0);
-    if (shmem == MAP_FAILED) {
+    if (address == MAP_FAILED) {
         cerr << "Map Failed" << endl;
         abort();
     }
 
-    shmem = new SharedMem();
+    SharedMem * shmem = new(address) SharedMem();
 
     pid_t pid = fork();
 
@@ -50,14 +50,14 @@ int main(int argc, char * argv[])
         shmem->setParserPID(getpid());
 
         // Call parser->digit
-        Parser myParser(shmem, filenames, MNIST_DATA_DIRECTORY);
+        Parser myParser(*shmem, filenames, MNIST_DATA_DIRECTORY);
         
     }else if (pid > 0) {
         // Parent process
         DEBUG_PRINT("Parent Process");
         shmem->setNetworkPID(getpid());
 
-        NetManager myManager(shmem, topology);
+        NetManager myManager(*shmem, topology);
     }else {
         // fork failed
         cerr << "Fork Failed" << endl;

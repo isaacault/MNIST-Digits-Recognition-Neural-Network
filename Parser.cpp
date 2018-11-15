@@ -1,6 +1,6 @@
 #include "Parser.h"
 
-Parser::Parser(SharedMem * shmem, vector<string> files, const string path)
+Parser::Parser(SharedMem & shmem, vector<string> files, const string path)
 {
     DEBUG_PRINT("Parser Constructer");
 
@@ -22,19 +22,19 @@ Parser::Parser(SharedMem * shmem, vector<string> files, const string path)
     traversePastHeader(fp_labels);
     
     while (!feof(fp_images) && !feof(fp_labels)) {
-        while(!shmem->consumed()) {
+        while(!shmem.consumed()) {
             //DEBUG_PRINT("Parser waiting");
-            usleep(5000); // this should be modified so that consumer wakes producer
+            usleep(50000); // this should be modified so that consumer wakes producer
         }
         DEBUG_PRINT("Parser taking action");
-        shmem->setConsumed(false);
         do {
             fread(&buf, sizeof(unsigned char), 1, fp_images);
         } while (m_digit.addPixel(buf));
         fread(&buf, sizeof(unsigned char), 1, fp_labels);
         m_digit.setLabel(buf);
 
-        shmem->setDigit(m_digit);
+        shmem.setDigit(m_digit);
+        shmem.setConsumed(false);
 
 
         m_digit.clean();
