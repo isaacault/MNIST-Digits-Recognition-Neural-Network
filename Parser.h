@@ -15,7 +15,7 @@ using namespace std;
 class Parser
 {
     public:
-        Parser(SharedMem & shmem, vector<string> file, const string path="MNIST/");
+        Parser(SharedMem * shmem, vector<string> file, const string path="MNIST/");
         bool fillQueue();
 
     private:

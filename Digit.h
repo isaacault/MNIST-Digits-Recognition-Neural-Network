@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "defs.h"
+#include "Array.h"
 
 using namespace std;
 
@@ -15,15 +16,15 @@ class Digit
         Digit();
         Digit& operator=(const Digit &dig);
         bool addPixel(const unsigned char pixel);
-        vector<double> getPicture() const;
+        Array<double> getPicture() const;
         void setLabel(const unsigned char label);
-        vector<double> getLabel() const;
+        Array<double> getLabel() const;
         void clean();
 
     private:
         int m_currentIndex; 
-        vector<double> m_picture; // change this to a vector
-        vector<double> m_label;        
+        Array<double> * m_picture; // change this to a vector
+        Array<double> * m_label;        
 };
 
 

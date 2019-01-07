@@ -7,15 +7,16 @@
 #include <iostream>
 #include "Neuron.h"
 #include "defs.h"
+#include "Array.h"
 
 
 class Net
 {
     public:
         Net(const vector<unsigned> &topology);
-        void feedForward(const vector<double> &inputVals);
-        void backProp(const vector<double> &targetVals);
-        void getResults(vector<double> &resultVals) const;
+        void feedForward(const Array<double> &inputVals);
+        void backProp(const Array<double> &targetVals);
+        void getResults(Array<double> &resultVals) const;
 
     private:
         vector<Layer> m_layers;

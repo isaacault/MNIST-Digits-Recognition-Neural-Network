@@ -14,7 +14,7 @@ Net::Net(const vector<unsigned> &topology)
         for (unsigned neuronNum = 0; neuronNum <= topology[layerNum]; neuronNum++) {
             m_layers.back().push_back(Neuron(numOutputs, neuronNum));
 
-            DEBUG_PRINT("Made a Neuron!");
+            DEBUG_PRINT("Made Neuron " << neuronNum);
         }
 
         // Force the bias node's output value to 1.0. It's the last neuron created above
@@ -23,7 +23,7 @@ Net::Net(const vector<unsigned> &topology)
 }
 
 
-void Net::feedForward(const vector<double> &inputVals)
+void Net::feedForward(const Array<double> &inputVals)
 {
     DEBUG_PRINT(inputVals.size() << " == " << m_layers[0].size() -1 << " ??");
     assert(inputVals.size() == m_layers[0].size() - 1);
@@ -47,7 +47,7 @@ void Net::feedForward(const vector<double> &inputVals)
 }
 
 
-void Net::backProp(const vector<double> &targetVals)
+void Net::backProp(const Array<double> &targetVals)
 {
     // Calulate the overall net error (Root Mean Square of output neuron errors)
 
@@ -99,7 +99,7 @@ void Net::backProp(const vector<double> &targetVals)
 }
 
 
-void Net::getResults(vector<double> &resultVals) const
+void Net::getResults(Array<double> &resultVals) const
 {
     resultVals.clear();
 

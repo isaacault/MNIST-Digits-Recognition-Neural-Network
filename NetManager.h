@@ -15,8 +15,8 @@ using namespace std;
 class NetManager
 {
     public:
-        NetManager(SharedMem & shmem, const vector<unsigned> &topology);
-        void printOutput(vector<double> label, vector<double> results);
+        NetManager(SharedMem * shmem, const vector<unsigned> &topology);
+        void printOutput(Array<double> label, Array<double> results);
 
     private:
         Net m_myNetwork;

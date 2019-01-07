@@ -50,14 +50,14 @@ int main(int argc, char * argv[])
         shmem->setParserPID(getpid());
 
         // Call parser->digit
-        Parser myParser(*shmem, filenames, MNIST_DATA_DIRECTORY);
+        Parser myParser(shmem, filenames, MNIST_DATA_DIRECTORY);
         
     }else if (pid > 0) {
         // Parent process
         DEBUG_PRINT("Parent Process");
         shmem->setNetworkPID(getpid());
 
-        NetManager myManager(*shmem, topology);
+        NetManager myManager(shmem, topology);
     }else {
         // fork failed
         cerr << "Fork Failed" << endl;

@@ -1,5 +1,5 @@
 OBJ = main.o Net.o Neuron.o Parser.o Digit.o NetManager.o SharedMem.o
-DEBUG = -pthread -DDEBUG -g
+DEBUG = -pthread -g
 
 network: $(OBJ)
 	g++ $(DEBUG) -o network $(OBJ)
@@ -22,7 +22,7 @@ NetManager.o: NetManager.cpp NetManager.h
 SharedMem.o: SharedMem.cpp SharedMem.h
 	g++ $(DEBUG) -c SharedMem.cpp
 
-Digit.o: Digit.cpp Digit.h
+Digit.o: Digit.cpp Digit.h Array.h
 	g++ $(DEBUG) -c Digit.cpp
 
 

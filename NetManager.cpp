@@ -1,33 +1,33 @@
 #include "NetManager.h"
 
-NetManager::NetManager(SharedMem & shmem, const vector<unsigned> &topology) :
+NetManager::NetManager(SharedMem * shmem, const vector<unsigned> &topology) :
     m_myNetwork(topology)
 {
     DEBUG_PRINT("NetManager Constructor");
     
-    vector<double> resultVals;
+    Array<double> * resultVals = new Array<double>(OUTPUT_RANGE);
     
     while(1) { // fix this
         usleep(500000);
 
-        while(!shmem.consumed()) {
+        while(!shmem->consumed()) {
             DEBUG_PRINT("NetManager taking action");
-            m_currentDigit = shmem.getDigit();
-            shmem.setConsumed(true);
+            m_currentDigit = shmem->getDigit();
+            shmem->setConsumed(true);
             DEBUG_PRINT("Feeding forward...");
-            m_myNetwork.feedForward((vector<double>) m_currentDigit.getPicture());
+            m_myNetwork.feedForward(m_currentDigit.getPicture());
             DEBUG_PRINT("Back propogating...");
             m_myNetwork.backProp(m_currentDigit.getLabel());
             DEBUG_PRINT("Getting results...");
-            m_myNetwork.getResults(resultVals);
-            printOutput(m_currentDigit.getLabel(), resultVals);
+            m_myNetwork.getResults(*resultVals);
+            printOutput(m_currentDigit.getLabel(), *resultVals);
         }
 
         // DEBUG_PRINT("NetManager skipped action");
     }
 }
 
-void NetManager::printOutput(vector<double> label, vector<double> results)
+void NetManager::printOutput(Array<double> label, Array<double> results)
 {
     int labelPos=0, resultPos=0, tempMax=0;
     for (unsigned i = 0; i < label.size(); i++) {

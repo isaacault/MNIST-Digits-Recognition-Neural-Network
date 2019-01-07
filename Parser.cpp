@@ -1,6 +1,6 @@
 #include "Parser.h"
 
-Parser::Parser(SharedMem & shmem, vector<string> files, const string path)
+Parser::Parser(SharedMem * shmem, vector<string> files, const string path)
 {
     DEBUG_PRINT("Parser Constructer");
 
@@ -22,7 +22,7 @@ Parser::Parser(SharedMem & shmem, vector<string> files, const string path)
     traversePastHeader(fp_labels);
     
     while (!feof(fp_images) && !feof(fp_labels)) {
-        while(!shmem.consumed()) {
+        while(!shmem->consumed()) {
             //DEBUG_PRINT("Parser waiting");
             usleep(50000); // this should be modified so that consumer wakes producer
         }
@@ -33,8 +33,11 @@ Parser::Parser(SharedMem & shmem, vector<string> files, const string path)
         fread(&buf, sizeof(unsigned char), 1, fp_labels);
         m_digit.setLabel(buf);
 
-        shmem.setDigit(m_digit);
-        shmem.setConsumed(false);
+        // Confirmed through GDB 30/12/18, m_digit.m_label is correct however
+        // shmem->getDigit().m_label does not. Implies below line is not functional.
+
+        shmem->setDigit(m_digit);
+        shmem->setConsumed(false);
 
 
         m_digit.clean();
