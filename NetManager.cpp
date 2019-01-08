@@ -5,6 +5,9 @@ NetManager::NetManager(SharedMem * shmem, const vector<unsigned> &topology) :
 {
     DEBUG_PRINT("NetManager Constructor");
     
+    m_successCount = 0;
+    m_failureCount = 0;
+
     Array<double> * resultVals = new Array<double>(OUTPUT_RANGE);
     
     while(1) { // fix this
@@ -29,23 +32,37 @@ NetManager::NetManager(SharedMem * shmem, const vector<unsigned> &topology) :
 
 void NetManager::printOutput(Array<double> label, Array<double> results)
 {
-    int labelPos=0, resultPos=0, tempMax=0;
+    double labelPos=0, resultPos=0, tempMax=-1;
     for (unsigned i = 0; i < label.size(); i++) {
+        // cout << "Label[" << i << "]: " << label[i] << " | " << "tempMax: " << tempMax << endl;
         if (label[i] > tempMax) {
             tempMax = label[i];
             labelPos=i;
+            // cout << "Update labelPos to " << i << endl;
         }
     }
-    tempMax = 0;
+    tempMax = -1;
     for (unsigned i = 0; i < results.size(); i++) {
+        // cout << "Results[" << i << "]: " << results[i] << " | " << "tempMax: " << tempMax << endl;
         if (results[i] > tempMax) {
             tempMax = results[i];
             resultPos=i;
+            // cout << "Update resultPos to " << i << endl;
         }
     }
 
     cout << endl;
+    cout << "ITERATION " << m_successCount + m_failureCount << endl;
     cout << "Digit : " << labelPos << endl;
     cout << "Read  : " << resultPos << endl;
-    cout << ((resultPos == labelPos) ? "SUCCESS" : "FAILURE") << endl;
+    //cout << ((resultPos == labelPos) ? "SUCCESS" : "FAILURE") << endl;
+    if (resultPos == labelPos){
+        cout << "SUCCESS" << endl;
+        m_successCount++; 
+    }else{
+        cout << "FAILURE" << endl;
+        m_failureCount++;
+    }
+    cout << "Current success count: " << m_successCount << endl;
+    //cout << m_myNetwork << endl;
 }

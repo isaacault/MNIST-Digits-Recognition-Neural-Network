@@ -107,3 +107,11 @@ void Net::getResults(Array<double> &resultVals) const
         resultVals.push_back(m_layers.back()[n].getOutputVal());
     }
 }
+
+ostream& operator<<(ostream& output, Net& n)
+{
+    unsigned i = 0;
+    for (i = 0; i < n.m_layers.back().size() -1; i++){
+        output << "Neuron " << i << ": " << n.m_layers.back()[i].getOutputVal() << endl;
+    }
+}

@@ -12,6 +12,8 @@
 
 class Net
 {
+    friend ostream& operator<<(ostream& output, Net& n);
+    
     public:
         Net(const vector<unsigned> &topology);
         void feedForward(const Array<double> &inputVals);

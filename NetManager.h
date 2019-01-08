@@ -21,6 +21,8 @@ class NetManager
     private:
         Net m_myNetwork;
         Digit m_currentDigit;
+        int m_successCount;
+        int m_failureCount;
 
 };
 
