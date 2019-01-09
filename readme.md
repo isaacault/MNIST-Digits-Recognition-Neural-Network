@@ -9,8 +9,8 @@ The neural network is fully functional, however the learning rate is slow. By mo
 ## Future Plans
 
 The first step to improve the network will be to decrease the time to convergence. There are numerous steps to this, but the first to begin looking at invlove
-    * Optimizing the algorithm and code
-    * Potentially forking the network into multiple networks that each handle their own batch, and then morphing/collapsing these into one master network
+* Optimizing the algorithm and code
+* Potentially forking the network into multiple networks that each handle their own batch, and then morphing/collapsing these into one master network
 
 Other future plans include creating a GUI that will display images of the digits being read, and perhaps create a program to scan images and feed them into the network.
 
