@@ -18,8 +18,9 @@ int main(int argc, char * argv[])
     
     vector<unsigned> topology;
     topology.push_back(PIXEL_COUNT);
-    topology.push_back(16);
-    topology.push_back(16);
+    topology.push_back(512);
+    topology.push_back(256);
+    topology.push_back(128);
     topology.push_back(10);
     //Net myNet(topology);
     /*

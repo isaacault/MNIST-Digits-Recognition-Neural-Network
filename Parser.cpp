@@ -24,7 +24,7 @@ Parser::Parser(SharedMem * shmem, vector<string> files, const string path)
     while (!feof(fp_images) && !feof(fp_labels)) {
         while(!shmem->consumed()) {
             //DEBUG_PRINT("Parser waiting");
-            usleep(50000); // this should be modified so that consumer wakes producer
+            usleep(1); // this should be modified so that consumer wakes producer
         }
         DEBUG_PRINT("Parser taking action");
         do {

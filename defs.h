@@ -5,6 +5,8 @@
 
 #define PIXEL_COUNT 28*28
 #define OUTPUT_RANGE 10
+#define BATCH_SIZE 100
+#define NUM_ITERATIONS 10000
 
 #ifdef DEBUG
 #include <unistd.h>

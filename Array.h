@@ -26,10 +26,12 @@ class Array
         T* getInts() { return m_ints; }
         int size() const { return m_index; }
         void clear() { 
+            /*
             int i;
             for (i = 0; i < m_index; i++){
                 m_ints[i] = 0;
             }
+            */
             m_index = 0;
         }
 

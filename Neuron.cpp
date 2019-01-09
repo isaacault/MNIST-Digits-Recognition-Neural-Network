@@ -1,7 +1,7 @@
 #include "Neuron.h"
 
+double Neuron::eta = 0.1; // overall net learning rate, [0.0..1.0]
 
-double Neuron::eta = 0.0001; // overall net learning rate, [0.0..1.0]
 double Neuron::alpha = 0.5; // momentum, multiplier of last deltaWeight, [0.0..n]
 
 
@@ -64,11 +64,11 @@ void Neuron::updateInputWeights(Layer &prevLayer)
         double newDeltaWeight = 
                 // Individual input, magnified by the gradient and train rate:
                 eta
-                + neuron.getOutputVal()
-                + m_gradient
+                * neuron.getOutputVal()
+                * m_gradient
                 // Also add momentum = a fraction of the previous delta weight
                 + alpha
-                + oldDeltaWeight;
+                * oldDeltaWeight;
 
         neuron.m_outputWeights[m_myIndex].deltaWeight = newDeltaWeight;
         neuron.m_outputWeights[m_myIndex].weight += newDeltaWeight;
@@ -82,10 +82,10 @@ double Neuron::transferFunction(double x)
     // return tanh(x);
 
     // output range [-1.0..1.0]
-    return x / (1 + abs(x));
+    // return x / (1 + abs(x));
 
     // output range [0..1.0]
-    // return 1 / (1+ exp(-x));
+    return 1 / (1+ exp(-x));
 }
 
 
@@ -93,9 +93,9 @@ double Neuron::transferFunctionDerivative(double x)
 {
     // return 1 - x*x;
 
-    return 1 / pow((abs(x) + 1), 2);
+    // return 1 / pow((abs(x) + 1), 2);
 
-    //return exp(x) / pow((exp(x) + 1), 2);
+    return exp(x) / pow((exp(x) + 1), 2);
 }
 
 

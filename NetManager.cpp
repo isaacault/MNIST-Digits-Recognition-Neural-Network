@@ -1,32 +1,40 @@
 #include "NetManager.h"
 
 NetManager::NetManager(SharedMem * shmem, const vector<unsigned> &topology) :
-    m_myNetwork(topology)
+    m_myNetwork(topology), m_currentDigit(Array<Digit>(BATCH_SIZE))
 {
     DEBUG_PRINT("NetManager Constructor");
     
     m_successCount = 0;
     m_failureCount = 0;
 
+    //m_currentDigit = Array<Digit>(BATCH_SIZE);
     Array<double> * resultVals = new Array<double>(OUTPUT_RANGE);
     
     while(1) { // fix this
-        usleep(500000);
 
-        while(!shmem->consumed()) {
-            DEBUG_PRINT("NetManager taking action");
-            m_currentDigit = shmem->getDigit();
-            shmem->setConsumed(true);
-            DEBUG_PRINT("Feeding forward...");
-            m_myNetwork.feedForward(m_currentDigit.getPicture());
-            DEBUG_PRINT("Back propogating...");
-            m_myNetwork.backProp(m_currentDigit.getLabel());
-            DEBUG_PRINT("Getting results...");
-            m_myNetwork.getResults(*resultVals);
-            printOutput(m_currentDigit.getLabel(), *resultVals);
+        while(m_currentDigit.size() < BATCH_SIZE){
+            while(!shmem->consumed()){
+                m_currentDigit.push_back(shmem->getDigit());
+                shmem->setConsumed(true);
+            }
         }
 
-        // DEBUG_PRINT("NetManager skipped action");
+        unsigned iteration, digitIndex;
+        for(iteration = 0; iteration < NUM_ITERATIONS; iteration++){
+            for(digitIndex = 0; digitIndex < BATCH_SIZE; digitIndex++){
+                DEBUG_PRINT("NetManager taking action");
+                DEBUG_PRINT("Feeding forward...");
+                m_myNetwork.feedForward(m_currentDigit[digitIndex].getPicture());
+                DEBUG_PRINT("Back propogating...");
+                m_myNetwork.backProp(m_currentDigit[digitIndex].getLabel());
+                DEBUG_PRINT("Getting results...");
+                m_myNetwork.getResults(*resultVals);
+                printOutput(m_currentDigit[digitIndex].getLabel(), *resultVals);
+            }
+        }
+
+        m_currentDigit.clear();
     }
 }
 
