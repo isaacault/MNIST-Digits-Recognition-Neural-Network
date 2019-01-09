@@ -1,6 +1,12 @@
 #ifndef PARSER_H
 #define PARSER_H
 
+/******************************************************************************
+ * Parser is essentially the main function for the child process. Parser is
+ * used to read the MNIST digit data, flip the endianness, and write it to 
+ * shared memory for NetManager.
+******************************************************************************/
+
 #include <string>
 #include <vector>
 #include <iostream>

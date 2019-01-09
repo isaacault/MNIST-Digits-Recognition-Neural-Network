@@ -1,6 +1,11 @@
 #ifndef SHAREDMEM_H
 #define SHAREDMEM_H
 
+/******************************************************************************
+ * SharedMem is used to manage the data passed between the child and parent. 
+ * This is where the mutex is handled and where the digit passed is stored. 
+******************************************************************************/
+
 #include <semaphore.h>
 #include "Digit.h"
 #include "defs.h"

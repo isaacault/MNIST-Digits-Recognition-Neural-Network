@@ -1,6 +1,12 @@
 #ifndef ARRAY_H
 #define ARRAY_H
 
+/******************************************************************************
+ * Array.h is used as a replacement for vectors in the IPC of this network. 
+ * This was done to eliminate the pointers and the issues that follow with 
+ * them when using vectors in shared memory.
+******************************************************************************/
+
 #include "defs.h"
 #include <unistd.h>
 #include <sys/mman.h>
@@ -26,12 +32,6 @@ class Array
         T* getInts() { return m_ints; }
         int size() const { return m_index; }
         void clear() { 
-            /*
-            int i;
-            for (i = 0; i < m_index; i++){
-                m_ints[i] = 0;
-            }
-            */
             m_index = 0;
         }
 

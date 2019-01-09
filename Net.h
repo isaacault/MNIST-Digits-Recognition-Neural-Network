@@ -1,6 +1,13 @@
 #ifndef NET_H
 #define NET_H
 
+/******************************************************************************
+ * Net is used to manage the neurons closely. This includes forward
+ * propogation, backward propogation, and interacting with the neurons on any 
+ * level.
+******************************************************************************/
+
+
 #include <vector>
 #include <cassert>
 #include <cstdlib>

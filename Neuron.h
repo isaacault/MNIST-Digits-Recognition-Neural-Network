@@ -1,6 +1,12 @@
 #ifndef NEURON_H
 #define NEURON_H
 
+/******************************************************************************
+ * Neuron is a class for neurons in the network. This is where the math is
+ * done for the weights of each neuron and the gradient descent to converge 
+ * towards correctness. 
+******************************************************************************/
+
 #include <vector>
 #include <cmath>
 using namespace std;

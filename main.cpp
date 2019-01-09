@@ -22,17 +22,8 @@ int main(int argc, char * argv[])
     topology.push_back(256);
     topology.push_back(128);
     topology.push_back(10);
-    //Net myNet(topology);
-    /*
-    vector<double> inputVals;
-    myNet.feedForward(inputVals);
 
-    vector<double> targetVals;
-    myNet.backProp(targetVals);
 
-    vector<double> resultVals;
-    myNet.getResults(resultVals);
-    */
     void * address =  mmap(NULL, (size_t) 2700, 
                                     PROT_READ|PROT_WRITE, 
                                     MAP_SHARED|MAP_ANONYMOUS, -1, 0);
@@ -50,7 +41,6 @@ int main(int argc, char * argv[])
         DEBUG_PRINT("Child Process");
         shmem->setParserPID(getpid());
 
-        // Call parser->digit
         Parser myParser(shmem, filenames, MNIST_DATA_DIRECTORY);
         
     }else if (pid > 0) {

@@ -1,6 +1,12 @@
 #ifndef NETMANAGER_H
 #define NETMANAGER_H
 
+/******************************************************************************
+ * NetManager is used to manage the Net. This is essentially the main function
+ * for the parent process. It handles reading from the shared memory and
+ * calling the appropriate functions from Net with the appropriate arguments.
+******************************************************************************/
+
 #include "Net.h"
 #include "Digit.h"
 #include "defs.h"

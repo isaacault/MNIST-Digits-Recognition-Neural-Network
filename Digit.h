@@ -1,6 +1,11 @@
 #ifndef DIGIT_H
 #define DIGIT_H
 
+/******************************************************************************
+ * Digit is used to store a digit. That is, the 'picture' and the label of what
+ * the digit written is.
+******************************************************************************/
+
 #include <vector>
 #include <iostream>
 #include <string.h>
@@ -23,7 +28,7 @@ class Digit
 
     private:
         int m_currentIndex; 
-        Array<double> * m_picture; // change this to a vector
+        Array<double> * m_picture;
         Array<double> * m_label;        
 };
 
