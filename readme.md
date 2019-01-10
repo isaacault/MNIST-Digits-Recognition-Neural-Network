@@ -1,6 +1,6 @@
 # MNIST Digits Recognition Neural Network
 
-This is my first neural netowrk. The purpose of this project is to familiarize myself with the concepts of neural networks (such as backpropogation using using gradient descent) as well as implement features that I have worked on in school but never on a personal project (forking, shared memory, mutexes, and template classes) by creating a C++ program that can recognize hand written digits.
+This is my first neural netowrk. The purpose of this project is to familiarize myself with the concepts of neural networks (such as backpropogation using using gradient descent) as well as implement features that I have worked on in school but never on a personal project (forking, shared memory, mutexes, and template classes) by creating a C++ program that will learn to recognize hand written digits.
 
 ## Current State
 
