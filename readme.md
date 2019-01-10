@@ -4,7 +4,7 @@ This is my first neural netowrk. The purpose of this project is to familiarize m
 
 ## Current State
 
-The neural network is fully functional, however the learning rate is slow. By modifying BATCH_SIZE in defs.h to 1, it takes ~58 iterations for the network to get the correct answer. Leaving as is, after 10 000 iteration on a batch size of 100, the network attained a success rate of 41% on the final iteration.
+The neural network is fully functional, however the learning rate is slow. By modifying BATCH_SIZE in defs.h to 1, it takes ~58 iterations for the network to get the correct answer. Leaving as is, after 10 000 iterations on a batch size of 100, the network attained a success rate of 41% on the final iteration.
 
 ## Future Plans
 
